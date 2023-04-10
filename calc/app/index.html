@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Number Calculation</title>
+	<style>
+  button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 12px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  input[type="text"] {
+    padding: 8px 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  #square {
+    color: #2196F3; /* Blue */
+  }
+  #cube {
+    color: #f44336; /* Red */
+  }
+  #fibonacci {
+    color: #FF9800; /* Orange */
+  }
+  #metrics {
+    font-size: 14px;
+    margin-top: 20px;
+  }
+  /* Additional Colors */
+  body {
+    background-color: #F0F0F0; /* Light Grey */
+  }
+  h1 {
+    color: #4CAF50; /* Green */
+  }
+  button#clear {
+    background-color: #808080; /* Grey */
+    color: #fff; /* White */
+  }
+  button#square {
+    background-color: #2196F3; /* Blue */
+  }
+  button#cube {
+    background-color: #f44336; /* Red */
+  }
+  button#fibonacci {
+    background-color: #FF9800; /* Orange */
+  }
+</style>
+
+	<script>
+		function calculate(type) {
+			var num = document.getElementById("number").value;
+			var result = 0;
+			var startTime = new Date().getTime();
+			if (type == "square") {
+				result = num * num;
+				document.getElementById("number").value = result;
+			} else if (type == "cube") {
+				result = num * num * num;
+				document.getElementById("number").value = result;
+			} else if (type == "fibonacci") {
+				result = fib(num);
+				document.getElementById("number").value = result;
+			}
+			var endTime = new Date().getTime();
+			var elapsed = endTime - startTime;
+			document.getElementById("metrics").innerHTML = type.charAt(0).toUpperCase() + type.slice(1) + " took " + elapsed + " milliseconds.";
+		}
+		function fib(n) {
+  if (n < 2) {
+    return n;
+  }
+  return fib(n - 1) + fib(n - 2);
+}
+		function clearInput() {
+		document.getElementById("number").value = "";
+		document.getElementById("metrics").innerHTML = "";
+	}
+	</script>
+</head>
+<body>
+	<h1>Number Calculation</h1>
+	<p>Enter a number:</p>
+	<input type="text" id="number" name="number">
+	<br><br>
+	<button onclick="calculate('square')">Square</button>
+	<button onclick="calculate('cube')">Cube</button>
+	<button onclick="calculate('fibonacci')">Fibonacci</button>
+	<button onclick="clearInput()">Clear</button>
+	<br><br>
+	<p id="metrics"></p>
+</body>
+</html>
